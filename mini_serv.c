@@ -13,7 +13,6 @@ char *msg[65536];
 char rbuf[1025], wbuf[42];
 fd_set rfds, wfds, fds;
 
-
 int extract_message(char **buf, char **msg)
 {
 	char	*newbuf;
@@ -131,18 +130,15 @@ int main(int ac, char **av) {
 	int sockfd = create_client();
 	struct sockaddr_in servaddr; 
 	bzero(&servaddr, sizeof(servaddr)); 
-
-	// assign IP, PORT 
+ 
 	servaddr.sin_family = AF_INET; 
 	servaddr.sin_addr.s_addr = 127 | (1 << 24);  //htonl(2130706433); //127.0.0.1
 	servaddr.sin_port = atoi(av[1]) >> 8 | atoi(av[1]) << 8;    //htons(8081); 
   
-	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))))
 		fatal();
 	if (listen(sockfd, SOMAXCONN))
 		fatal();
-	
 	while(42)
 	{
 		rfds = wfds = fds;
@@ -176,14 +172,5 @@ int main(int ac, char **av) {
 			}
 		}
 	}
-
-
-
-
-
-
-
-
-
         return (0);
 }
