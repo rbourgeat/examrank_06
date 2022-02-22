@@ -62,7 +62,7 @@ char *str_join(char *buf, char *add)
 
 void fatal(void)
 {
-	write(1, "Fatal error\n", 12);
+	write(2, "Fatal error\n", 12);
 	exit(1);
 }
 
